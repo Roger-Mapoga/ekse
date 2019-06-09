@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">ekse</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">ekse (GmapSolution)</string>
+    <string name="nav_header_subtitle">lehlognolo.roger@gmail.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="top_hits">Top Hits</string>
+    <string name="my_music">My Music</string>
+    <string name="playlist">Playlist</string>
+    <string name="search_label"></string>
+    <string name="search_hint">Search</string>
+    <string name="help_label">help</string>
+    <string name="cancel">Cancel</string>
+</resources>
