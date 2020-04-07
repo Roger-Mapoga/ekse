@@ -1,13 +1,12 @@
 package co.za.gmapssolutions.ekse;
 
-import android.content.DialogInterface;
-import android.content.Intent;
+import android.content.*;
+import android.content.ServiceConnection;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
+import android.os.*;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,19 +16,10 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
-
-
 public class Tab_1_Activity extends Fragment implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener {
 
     private ListView listView;
-
     private MediaPlayer mediaPlayer;
-    public static final String SongToDownload = "song_to_download";
     String[] values;
 
     @Override
@@ -40,6 +30,7 @@ public class Tab_1_Activity extends Fragment implements AdapterView.OnItemClickL
     @Override
     public  void  onActivityCreated(Bundle savedInstanceState){
         super.onActivityCreated(savedInstanceState);
+
         listView = getView().findViewById(R.id.list);
         values = new String[] { "01. Emotion.mp3", "02. Good Bad.mp3", "03. Dangerous.mp3",
                 "04. Sauce.mp3", "05. Whatchamacallit feat. Chris Brown CDQ.mp3", "06. Cheap Shot.mp3",
@@ -113,46 +104,11 @@ public class Tab_1_Activity extends Fragment implements AdapterView.OnItemClickL
                 // The 'which' argument contains the index position
                 // of the selected item
 
-             //   Intent intent = new Intent(getContext(),DownloadSong.class);
-               // intent.putExtra(SongToDownload,values[position]);
-                //getContext().startService(intent);
+                //Intent intent = new Intent(getContext(),DownloadSong.class);
+                //intent.putExtra(DownloadSong.SONG_NAME,values[position]);
 
-                int count;
-
-                try {
-                    //open database
-                    DataBaseAdapter DBAdapter = new DataBaseAdapter(getContext());
-                    DBAdapter.open();
-
-                    URL url = new URL(ConfigAPI.API_URL+ values[position]);
-                    URLConnection session = url.openConnection();
-                    session.connect();
-
-                    InputStream song = new BufferedInputStream(url.openStream());
-                    ByteArrayOutputStream bas = new ByteArrayOutputStream();
-
-                    byte data[] = new byte[1024];
-
-                    //long total = 0;
-
-                    while ((count = song.read(data)) != -1){
-                        //total += count;
-
-                        Toast.makeText(getContext(),data.toString(),Toast.LENGTH_LONG).show();
-
-                        bas.write(data,0,count);
-                    }
-
-
-                    DBAdapter.insertSong("Ella Main","Naked",bas.toByteArray(),"mp3");
-
-                    song.close();
-
-                }catch (Exception e){
-                    e.printStackTrace();
-                    Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_LONG).show();
-
-                }
+                //intent.putExtra(DownloadSong.MESSENGER,messenger);
+                //getActivity().startService(intent);
 
                 Toast.makeText(getContext(),"Saving song: " + position,Toast.LENGTH_LONG).show();
 
@@ -175,9 +131,7 @@ public class Tab_1_Activity extends Fragment implements AdapterView.OnItemClickL
 
         return  true;
     }
-
-
-    private void togglePlayPause() {
+       private void togglePlayPause() {
         if (mediaPlayer.isPlaying()) {
             mediaPlayer.pause();
             //mPlayerControl.setImageResource(R.drawable.ic_play);
@@ -186,4 +140,5 @@ public class Tab_1_Activity extends Fragment implements AdapterView.OnItemClickL
             //mPlayerControl.setImageResource(R.drawable.ic_pause);
         }
     }
+
 }

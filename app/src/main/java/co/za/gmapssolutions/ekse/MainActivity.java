@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         toolbar = findViewById(R.id.toolbar);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         viewPager = (ViewPager) findViewById(R.id.pager);
@@ -152,4 +150,6 @@ public class MainActivity extends AppCompatActivity
             //use the query to search your data somehow
         }
     }
+
+
 }

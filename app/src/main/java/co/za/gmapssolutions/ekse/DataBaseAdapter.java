@@ -26,36 +26,36 @@ public class DataBaseAdapter {
 
     public DataBaseAdapter(Context context){
         this.context = context;
-        DBHelper = new DatabaseHelper(context);
+        DBHelper = new DatabaseHelper(this.context);
     }
 
     private static class DatabaseHelper extends SQLiteOpenHelper {
-        Context context;
+        //Context context;
         DatabaseHelper(Context context){
             super(context,DATABASE_NAME,null,DATABASE_VERSION);
-            this.context = context;
+            //this.context = context;
         }
         @Override
         public void onCreate(SQLiteDatabase db){
             try {
                 db.execSQL(DATABASE_CREATE);
-                Toast.makeText(context,"Database created ",Toast.LENGTH_LONG).show();
+               // Toast.makeText(context,"Database created ",Toast.LENGTH_LONG).show();
             }catch (Exception e){
                 e.printStackTrace();
-                Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
+                //Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
             }
         }
         @Override
         public void onUpgrade(SQLiteDatabase db,int oldVersion,int newVersion){
             Log.w(TAG,"Upgrading database from version " + oldVersion + " to "
                     + newVersion + ", which will destroy all old data");
-            db.execSQL("DROP TABLE IF EXISTS contacts");
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_SONGS );
             onCreate(db);
         }
     }
     //---opens the database---
     public DataBaseAdapter open() throws SQLException {
-        Toast.makeText(context,"Database Opened ",Toast.LENGTH_LONG).show();
+        //Toast.makeText(context,"Database Opened ",Toast.LENGTH_LONG).show();
         db = DBHelper.getWritableDatabase();
         return this;
     }
@@ -67,11 +67,11 @@ public class DataBaseAdapter {
 
     public void insertSong(String artist,String title,byte[] song,String format){
         try {
-            String sql = "INSERT INTO "+TABLE_SONGS+" (title,artist,song,format) VALUES("+title+","+artist+","+song+","+format+")";
+            String sql = "INSERT INTO "+ TABLE_SONGS + "(title,artist,song,format) VALUES("+ title +","+ artist +","+ song +","+ format + ");";
             db.execSQL(sql);
         }catch (Exception e){
             e.printStackTrace();
-            Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
+            //Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
         }
     }
 }
